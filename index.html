@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirigiendo a Diamond Talent...</title>
+    <script>
+        // Este script detecta si estamos en el navegador de TikTok
+        var isTikTok = navigator.userAgent.includes("TikTok");
+        var waLink = "https://api.whatsapp.com/send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent";
+
+        if (isTikTok) {
+            // Intentamos forzar la apertura en el navegador externo o App
+            window.location.href = waLink;
+        } else {
+            // Si ya estamos fuera, vamos directo
+            window.location.href = waLink;
+        }
+    </script>
+</head>
+<body>
+    <p>Si no eres redirigido automáticamente, <a href="https://api.whatsapp.com/send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent">haz clic aquí</a>.</p>
+</body>
+</html>
