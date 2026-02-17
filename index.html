@@ -2,21 +2,37 @@
 <html>
 <head>
     <title>Redirigiendo a Diamond Talent...</title>
+    <meta charset="UTF-8">
     <script>
-        // Este script detecta si estamos en el navegador de TikTok
-        var isTikTok = navigator.userAgent.includes("TikTok");
-        var waLink = "https://api.whatsapp.com/send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent";
+        function intentarRedireccion() {
+            var waNumber = "18096427917";
+            var waText = encodeURIComponent("Hola quiero unirme al Equipo Diamond Talent");
+            var webUrl = "https://api.whatsapp.com/send?phone=" + waNumber + "&text=" + waText;
+            
+            // Intent para Android: Fuerza a que el sistema operativo busque Chrome o la App
+            var intentUrl = "intent://api.whatsapp.com/send?phone=" + waNumber + "&text=" + waText + "#Intent;scheme=https;package=com.android.chrome;end";
 
-        if (isTikTok) {
-            // Intentamos forzar la apertura en el navegador externo o App
-            window.location.href = waLink;
-        } else {
-            // Si ya estamos fuera, vamos directo
-            window.location.href = waLink;
+            var isTikTok = navigator.userAgent.includes("TikTok");
+            var isAndroid = navigator.userAgent.includes("Android");
+
+            if (isTikTok && isAndroid) {
+                // En Android, este comando intenta "despertar" al navegador externo (Chrome)
+                window.location.href = intentUrl;
+            } else {
+                // En iOS o PC, usamos el link normal, pero con un pequeño delay para asegurar la carga
+                window.location.href = webUrl;
+            }
         }
+
+        // Ejecutamos la función al cargar
+        window.onload = intentarRedireccion;
     </script>
 </head>
-<body>
-    <p>Si no eres redirigido automáticamente, <a href="https://api.whatsapp.com/send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent">haz clic aquí</a>.</p>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px;">
+    <h2>Redirigiendo a WhatsApp...</h2>
+    <p>Si no sales del navegador de TikTok automáticamente:</p>
+    <p>Haz clic en los <strong>3 puntos (⋮)</strong> arriba a la derecha y selecciona <strong>"Abrir en el navegador"</strong>.</p>
+    <br>
+    <a href="https://api.whatsapp.com/send?phone=18096427917" style="padding: 15px; background: #25D366; color: white; text-decoration: none; border-radius: 5px;">Hacer clic para entrar</a>
 </body>
 </html>
