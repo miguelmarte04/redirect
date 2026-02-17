@@ -5,34 +5,44 @@
     <meta charset="UTF-8">
     <script>
         function intentarRedireccion() {
-            var waNumber = "18096427917";
+            var waNumber = "18096427917"; // Tu número de RD
             var waText = encodeURIComponent("Hola quiero unirme al Equipo Diamond Talent");
-            var webUrl = "https://api.whatsapp.com/send?phone=" + waNumber + "&text=" + waText;
             
-            // Intent para Android: Fuerza a que el sistema operativo busque Chrome o la App
-            var intentUrl = "intent://api.whatsapp.com/send?phone=" + waNumber + "&text=" + waText + "#Intent;scheme=https;package=com.android.chrome;end";
+            // 1. Protocolo URI directo (Evita el dominio api.whatsapp.com)
+            var uriLink = "whatsapp://send?phone=" + waNumber + "&text=" + waText;
+            
+            // 2. Intent para Android (Forza a Chrome a despertar la App)
+            var intentUrl = "intent://send?phone=" + waNumber + "&text=" + waText + "#Intent;scheme=whatsapp;package=com.whatsapp;end";
 
             var isTikTok = navigator.userAgent.includes("TikTok");
             var isAndroid = navigator.userAgent.includes("Android");
 
             if (isTikTok && isAndroid) {
-                // En Android, este comando intenta "despertar" al navegador externo (Chrome)
+                // En Android dentro de TikTok, el Intent es lo más potente
                 window.location.href = intentUrl;
             } else {
-                // En iOS o PC, usamos el link normal, pero con un pequeño delay para asegurar la carga
-                window.location.href = webUrl;
+                // En iOS o cuando ya se abrió en el navegador nativo, usamos el URI
+                window.location.href = uriLink;
             }
         }
 
-        // Ejecutamos la función al cargar
         window.onload = intentarRedireccion;
     </script>
 </head>
-<body style="text-align: center; font-family: sans-serif; padding-top: 50px;">
-    <h2>Redirigiendo a WhatsApp...</h2>
-    <p>Si no sales del navegador de TikTok automáticamente:</p>
-    <p>Haz clic en los <strong>3 puntos (⋮)</strong> arriba a la derecha y selecciona <strong>"Abrir en el navegador"</strong>.</p>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px; background-color: #000; color: #fff;">
+    <img src="https://linktree.sirv.com/images/logos/diamond-talent.png" alt="Diamond Talent" style="width: 100px; margin-bottom: 20px;">
+    <h2>Redirigiendo a tu Agente...</h2>
+    
+    <div style="background: #222; margin: 20px; padding: 20px; border-radius: 10px; border: 1px solid #444;">
+        <p>Si la aplicación no abre automáticamente:</p>
+        <p>1. Toca los <strong>3 puntos (⋮)</strong> arriba a la derecha.</p>
+        <p>2. Selecciona <strong>"Abrir en el navegador"</strong>. 🌐</p>
+    </div>
+
     <br>
-    <a href="https://api.whatsapp.com/send?phone=18096427917" style="padding: 15px; background: #25D366; color: white; text-decoration: none; border-radius: 5px;">Hacer clic para entrar</a>
+    <a href="whatsapp://send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent" 
+       style="padding: 15px 30px; background: #25D366; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2em;">
+       ¡ABRIR WHATSAPP AHORA! 💎
+    </a>
 </body>
 </html>
