@@ -1,48 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Redirigiendo a Diamond Talent...</title>
     <meta charset="UTF-8">
-    <script>
-        function intentarRedireccion() {
-            var waNumber = "18096427917"; // Tu número de RD
-            var waText = encodeURIComponent("Hola quiero unirme al Equipo Diamond Talent 💎");
-            
-            // 1. Protocolo URI directo (Evita el dominio api.whatsapp.com)
-            var uriLink = "whatsapp://send?phone=" + waNumber + "&text=" + waText;
-            
-            // 2. Intent para Android (Forza a Chrome a despertar la App)
-            var intentUrl = "intent://send?phone=" + waNumber + "&text=" + waText + "#Intent;scheme=whatsapp;package=com.whatsapp;end";
-
-            var isTikTok = navigator.userAgent.includes("TikTok");
-            var isAndroid = navigator.userAgent.includes("Android");
-
-            if (isTikTok && isAndroid) {
-                // En Android dentro de TikTok, el Intent es lo más potente
-                window.location.href = intentUrl;
-            } else {
-                // En iOS o cuando ya se abrió en el navegador nativo, usamos el URI
-                window.location.href = uriLink;
-            }
-        }
-
-        window.onload = intentarRedireccion;
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Talent | Acceso Oficial</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 40px 20px; }
+        .logo { width: 120px; margin-bottom: 20px; }
+        .card { background: #111; border: 1px solid #333; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .btn { display: inline-block; padding: 18px 35px; background: #25D366; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); margin: 20px 0; transition: transform 0.2s; }
+        .btn:active { transform: scale(0.95); }
+        .instruction { background: #222; padding: 15px; border-radius: 10px; font-size: 0.9em; line-height: 1.5; border-left: 4px solid #f39c12; text-align: left; margin-top: 20px; }
+        .highlight { color: #f39c12; font-weight: bold; }
+    </style>
 </head>
-<body style="text-align: center; font-family: sans-serif; padding-top: 50px; background-color: #000; color: #fff;">
-    <img src="https://linktree.sirv.com/images/logos/diamond-talent.png" alt="Diamond Talent" style="width: 100px; margin-bottom: 20px;">
-    <h2>Redirigiendo a tu Agente...</h2>
-    
-    <div style="background: #222; margin: 20px; padding: 20px; border-radius: 10px; border: 1px solid #444;">
-        <p>Si la aplicación no abre automáticamente:</p>
-        <p>1. Toca los <strong>3 puntos (⋮)</strong> arriba a la derecha.</p>
-        <p>2. Selecciona <strong>"Abrir en el navegador"</strong>. 🌐</p>
+<body>
+
+    <div class="card">
+        <img src="https://linktree.sirv.com/images/logos/diamond-talent.png" alt="Diamond Talent" class="logo">
+        <h2>¡Casi dentro, equipo! 💎</h2>
+        <p>Para postular a la agencia, haz clic en el botón verde:</p>
+
+        <a id="wa-btn" href="#" class="btn">🚀 ENTRAR A WHATSAPP</a>
+
+        <div class="instruction">
+            <p>⚠️ <strong>Si ves un error o no abre:</strong></p>
+            <ol>
+                <li>Toca los <span class="highlight">3 puntos (⋮)</span> arriba a la derecha.</li>
+                <li>Selecciona <span class="highlight">"Abrir en el navegador"</span>. 🌐</li>
+            </ol>
+        </div>
     </div>
 
-    <br>
-    <a href="whatsapp://send?phone=18096427917&text=Hola%20quiero%20unirme%20al%20Equipo%20Diamond%20Talent" 
-       style="padding: 15px 30px; background: #25D366; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2em;">
-       ¡ABRIR WHATSAPP AHORA! 💎
-    </a>
+    <script>
+        (function() {
+            var phone = "18096427917"; // Tu número de RD
+            var text = encodeURIComponent("Hola quiero unirme al Equipo Diamond Talent 💎");
+            
+            // Detectamos plataforma
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isTikTok = /TikTok/i.test(navigator.userAgent);
+            
+            var btn = document.getElementById('wa-btn');
+            
+            // LÓGICA DE INGENIERÍA DE ENLACES
+            if (isAndroid) {
+                // En Android forzamos el Intent para que Chrome despierte la App
+                btn.href = "intent://api.whatsapp.com/send?phone=" + phone + "&text=" + text + "#Intent;scheme=https;package=com.android.chrome;end";
+            } else {
+                // En iOS usamos el protocolo URI directo
+                btn.href = "whatsapp://send?phone=" + phone + "&text=" + text;
+            }
+
+            // Si es TikTok, lanzamos una alerta visual extra
+            if (isTikTok) {
+                console.log("TikTok Browser Detected - Manual Bypass Required");
+            }
+        })();
+    </script>
 </body>
 </html>
